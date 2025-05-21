@@ -1,6 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import React from "react";
-
+import PieChart from "./PieChart";
 import TotalExpences from "./TotalExpences";
 import WalletBalance from "./WalletBalance";
 
@@ -29,8 +28,12 @@ function TrackerLanding() {
         <Grid size={{ lg: 4, md: 6, sm: 12, xs: 12 }}>
           <WalletBalance />
         </Grid>
+
         <Grid size={{ lg: 4, md: 6, sm: 12, xs: 12 }}>
           <TotalExpences />
+        </Grid>
+        <Grid size={{ lg: 4, md: 6, sm: 12, xs: 12 }} sx={{ height: "15rem" }}>
+          <PieChart />
         </Grid>
       </Grid>
     </Grid>

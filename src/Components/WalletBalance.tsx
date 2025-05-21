@@ -1,15 +1,42 @@
-import { Grid, Typography, Box, Button } from "@mui/material";
-import React from "react";
-import AddIcon from "@mui/icons-material/Add";
+import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 
 function WalletBalance() {
+  const [state, setState] = useState<any>(null);
+  const [open, setOpen] = useState<boolean>(false);
+  const storedIncome = localStorage.getItem("balance");
+  const balance: any = storedIncome ? JSON.parse(storedIncome) : 0;
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 500,
+    bgcolor: "#EFEFEFD9",
+    boxShadow: 24,
+    borderRadius: "15px",
+    p: 3,
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const addIncome = () => {
+    if (state) {
+      const data = balance ? Number(balance) + Number(state) : Number(state);
+      localStorage.setItem("balance", JSON.stringify(data));
+    }
+    setState(null);
+    handleClose();
+  };
   return (
     <Grid
       sx={{
         backgroundColor: "#9B9B9B",
         py: "3.25rem",
         px: "1.5rem",
-        width: "22rem",
+        maxWidth: "22rem",
         borderRadius: "15px",
         display: "flex",
         flexDirection: "column",
@@ -30,7 +57,7 @@ function WalletBalance() {
           Wallet Balance:
         </Typography>
         <Typography variant="h5" sx={{ color: "#9DFF5B" }}>
-          ₹4500
+          ₹{balance || 0}
         </Typography>
       </Box>
       <Button
@@ -44,9 +71,53 @@ function WalletBalance() {
           px: "25px",
           py: "10px",
         }}
+        onClick={() => setOpen(true)}
       >
         + Add Income
       </Button>
+
+      <Modal
+        open={open}
+        // onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h5">
+            Add Balance
+          </Typography>
+          <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+            <TextField
+              label="Income Amount"
+              placeholder="Income Amount"
+              required
+              type="number"
+              size="small"
+              sx={{ border: "none" }}
+              value={state}
+              onChange={(e: any) => setState(e.target.value)}
+            />
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "#F4BB4A", borderRadius: "15px" }}
+              onClick={addIncome}
+            >
+              Add Balance
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#E3E3E3",
+                borderRadius: "15px",
+                color: "#000",
+              }}
+              onClick={handleClose}
+            >
+              Cancel
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
     </Grid>
   );
 }
