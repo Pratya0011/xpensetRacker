@@ -23,12 +23,13 @@ function TotalExpences({
   setNetBalance,
   categoryTotal,
   setCategoryTotal,
+  total,
+  setTotal,
 }: any) {
   const storedExpenses = localStorage.getItem("expenses");
   const balance: any = storedExpenses ? JSON.parse(storedExpenses) : [];
   const storedIncome = localStorage.getItem("balance");
   const incomeBalance: any = storedIncome ? JSON.parse(storedIncome) : 0;
-  const [total, setTotal] = useState<number>(0);
   const [state, setState] = useState<IState[]>([]);
   const [formData, setFormData] = useState<IState>({
     title: "",
@@ -66,7 +67,8 @@ function TotalExpences({
 
   const addExpense = (e: any) => {
     e.preventDefault();
-    const data = [...state, formData];
+    const data = [...state];
+    data.unshift(formData);
     const totals: { [key: string]: number } = {};
     setState(data);
     localStorage.setItem("expenses", JSON.stringify(data));
