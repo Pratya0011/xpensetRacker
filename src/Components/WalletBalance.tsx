@@ -22,7 +22,8 @@ function WalletBalance() {
     setOpen(false);
   };
 
-  const addIncome = () => {
+  const addIncome = (e) => {
+    e.preventDefault();
     if (state) {
       const data = balance ? Number(balance) + Number(state) : Number(state);
       localStorage.setItem("balance", JSON.stringify(data));
@@ -86,36 +87,42 @@ function WalletBalance() {
           <Typography id="modal-modal-title" variant="h5">
             Add Balance
           </Typography>
-          <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
-            <TextField
-              label="Income Amount"
-              placeholder="Income Amount"
-              required
-              type="number"
-              size="small"
-              sx={{ border: "none" }}
-              value={state}
-              onChange={(e: any) => setState(e.target.value)}
-            />
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "#F4BB4A", borderRadius: "15px" }}
-              onClick={addIncome}
-            >
-              Add Balance
-            </Button>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#E3E3E3",
-                borderRadius: "15px",
-                color: "#000",
-              }}
-              onClick={handleClose}
-            >
-              Cancel
-            </Button>
-          </Box>
+          <form
+            onSubmit={(e: any) => {
+              addIncome(e);
+            }}
+          >
+            <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
+              <TextField
+                label="Income Amount"
+                placeholder="Income Amount"
+                required
+                type="number"
+                size="small"
+                sx={{ border: "none" }}
+                value={state}
+                onChange={(e: any) => setState(e.target.value)}
+              />
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "#F4BB4A", borderRadius: "15px" }}
+                type="submit"
+              >
+                Add Balance
+              </Button>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#E3E3E3",
+                  borderRadius: "15px",
+                  color: "#000",
+                }}
+                onClick={handleClose}
+              >
+                Cancel
+              </Button>
+            </Box>
+          </form>
         </Box>
       </Modal>
     </Grid>
