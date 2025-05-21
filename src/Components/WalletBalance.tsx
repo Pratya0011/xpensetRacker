@@ -22,7 +22,7 @@ function WalletBalance() {
     setOpen(false);
   };
 
-  const addIncome = (e) => {
+  const addIncome = (e: any) => {
     e.preventDefault();
     if (state) {
       const data = balance ? Number(balance) + Number(state) : Number(state);
@@ -94,6 +94,7 @@ function WalletBalance() {
           >
             <Box sx={{ display: "flex", gap: 2, mt: 2 }}>
               <TextField
+                name="Income Amount"
                 label="Income Amount"
                 placeholder="Income Amount"
                 required

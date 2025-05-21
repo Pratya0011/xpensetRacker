@@ -133,6 +133,7 @@ function TotalExpences() {
             <Grid container mt={2} gap={2}>
               <Grid size={{ lg: 5, md: 5, sm: 12, xs: 12 }}>
                 <TextField
+                  name="title"
                   label="Title"
                   placeholder="Title"
                   required
@@ -152,6 +153,7 @@ function TotalExpences() {
               </Grid>
               <Grid size={{ lg: 5, md: 5, sm: 12, xs: 12 }}>
                 <TextField
+                  name="price"
                   label="Price"
                   placeholder="Price"
                   required
@@ -190,6 +192,7 @@ function TotalExpences() {
                   renderInput={(params) => (
                     <TextField
                       {...params}
+                      name="category"
                       required
                       label="Select Category"
                       placeholder="Select Category"
@@ -199,6 +202,7 @@ function TotalExpences() {
               </Grid>
               <Grid size={{ lg: 5, md: 5, sm: 12, xs: 12 }}>
                 <TextField
+                  name="date"
                   label="dd/mm/yyyy"
                   placeholder="dd/mm/yyyy"
                   required
