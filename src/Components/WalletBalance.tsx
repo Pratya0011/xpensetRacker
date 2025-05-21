@@ -45,7 +45,7 @@ function WalletBalance() {
           py: "10px",
         }}
       >
-        Add Expense
+        Add Income
       </Button>
     </Grid>
   );
