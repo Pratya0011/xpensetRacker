@@ -37,6 +37,7 @@ function WalletBalance({ netBalance, setNetBalance }: any) {
     if (state) {
       const data = balance ? Number(balance) + Number(state) : Number(state);
       localStorage.setItem("balance", JSON.stringify(data));
+      setNetBalance(data);
     }
     setState(null);
     handleClose();
