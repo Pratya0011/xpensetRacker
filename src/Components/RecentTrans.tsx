@@ -134,173 +134,182 @@ function RecentTrans({
         backgroundColor: "#fff",
         border: "1px solid #9B9B9B",
         borderRadius: "15px",
-        pt: "40px",
+        pt: transitionList?.length ? "40px" : 0,
         px: "30px",
       }}
     >
-      {currentItems?.map((item: any, index: number) => (
+      {transitionList?.length > 0 ? (
         <>
+          {currentItems?.map((item: any, index: number) => (
+            <React.Fragment key={index}>
+              <Grid
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  gap: "9px",
+                  mt: index > 0 ? 2 : 0,
+                }}
+              >
+                <Grid sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  {item?.category === "Food" ? (
+                    <Box
+                      sx={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                        backgroundColor: "#dbdbdb",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <IoPizzaOutline />
+                    </Box>
+                  ) : item?.category === "Travel" ? (
+                    <Box
+                      sx={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                        backgroundColor: "#dbdbdb",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <MdOutlineLuggage />
+                    </Box>
+                  ) : (
+                    <Box
+                      sx={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "50%",
+                        backgroundColor: "#dbdbdb",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <LuGift />
+                    </Box>
+                  )}
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Typography variant="body1" sx={{ fontWeight: 400 }}>
+                      {item?.title}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      sx={{ fontWeight: 400, color: "#9B9B9B" }}
+                    >
+                      {item?.date}
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <Typography variant="body1" sx={{ color: "#F4BB4A" }}>
+                    ₹{item?.price}
+                  </Typography>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Box
+                      sx={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "15px",
+                        backgroundColor: "#fe4444",
+                        color: "#fff",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <TiDeleteOutline />
+                    </Box>
+                    <Box
+                      onClick={() => handleEdit(index)}
+                      sx={{
+                        width: "30px",
+                        height: "30px",
+                        borderRadius: "15px",
+                        backgroundColor: "#f4bb4a",
+                        color: "#fff",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <MdOutlineModeEdit />
+                    </Box>
+                  </Box>
+                </Grid>
+              </Grid>
+              <Divider sx={{ width: "100%", color: "#000" }} />
+            </React.Fragment>
+          ))}
+
           <Grid
             sx={{
               display: "flex",
+              justifyContent: "center",
               alignItems: "center",
-              justifyContent: "space-between",
-              gap: "9px",
-              mt: index > 0 ? 2 : 0,
+              gap: 2,
+              p: 2,
             }}
           >
-            <Grid sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              {item?.category === "Food" ? (
-                <Box
-                  sx={{
-                    width: "30px",
-                    height: "30px",
-                    borderRadius: "50%",
-                    backgroundColor: "#dbdbdb",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <IoPizzaOutline />
-                </Box>
-              ) : item?.category === "Travel" ? (
-                <Box
-                  sx={{
-                    width: "30px",
-                    height: "30px",
-                    borderRadius: "50%",
-                    backgroundColor: "#dbdbdb",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <MdOutlineLuggage />
-                </Box>
-              ) : (
-                <Box
-                  sx={{
-                    width: "30px",
-                    height: "30px",
-                    borderRadius: "50%",
-                    backgroundColor: "#dbdbdb",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <LuGift />
-                </Box>
-              )}
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography variant="body1" sx={{ fontWeight: 400 }}>
-                  {item?.title}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 400, color: "#9B9B9B" }}
-                >
-                  {item?.date}
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Typography variant="body1" sx={{ color: "#F4BB4A" }}>
-                ₹{item?.price}
-              </Typography>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <Box
-                  sx={{
-                    width: "30px",
-                    height: "30px",
-                    borderRadius: "15px",
-                    backgroundColor: "#fe4444",
-                    color: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <TiDeleteOutline />
-                </Box>
-                <Box
-                  onClick={() => handleEdit(index)}
-                  sx={{
-                    width: "30px",
-                    height: "30px",
-                    borderRadius: "15px",
-                    backgroundColor: "#f4bb4a",
-                    color: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <MdOutlineModeEdit />
-                </Box>
-              </Box>
-            </Grid>
+            <Box
+              onClick={handlePrev}
+              sx={{
+                width: "30px",
+                height: "30px",
+                borderRadius: "15px",
+                backgroundColor: "#F1F1F1",
+                color: "#000",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: currentPage > 1 ? "pointer" : "not-allowed",
+              }}
+            >
+              <FaArrowLeft />
+            </Box>
+            <Box
+              sx={{
+                width: "30px",
+                height: "30px",
+                borderRadius: "5px",
+                backgroundColor: "#43967B",
+                color: "#000",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {currentPage}
+            </Box>
+            <Box
+              onClick={handleNext}
+              sx={{
+                width: "30px",
+                height: "30px",
+                borderRadius: "15px",
+                backgroundColor: "#F1F1F1",
+                color: "#000",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: currentPage < totalPages ? "pointer" : "not-allowed",
+              }}
+            >
+              <FaArrowRight />
+            </Box>
           </Grid>
-          <Divider sx={{ width: "100%", color: "#000" }} />
         </>
-      ))}
-      <Grid
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: 2,
-          p: 2,
-        }}
-      >
-        <Box
-          onClick={handlePrev}
-          sx={{
-            width: "30px",
-            height: "30px",
-            borderRadius: "15px",
-            backgroundColor: "#F1F1F1",
-            color: "#000",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: currentPage > 1 ? "pointer" : "not-allowed",
-          }}
-        >
-          <FaArrowLeft />
+      ) : (
+        <Box sx={{ m: 2 }}>
+          <Typography>No Transactions!</Typography>
         </Box>
-        <Box
-          sx={{
-            width: "30px",
-            height: "30px",
-            borderRadius: "5px",
-            backgroundColor: "#43967B",
-            color: "#000",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {currentPage}
-        </Box>
-        <Box
-          onClick={handleNext}
-          sx={{
-            width: "30px",
-            height: "30px",
-            borderRadius: "15px",
-            backgroundColor: "#F1F1F1",
-            color: "#000",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: currentPage < totalPages ? "pointer" : "not-allowed",
-          }}
-        >
-          <FaArrowRight />
-        </Box>
-      </Grid>
+      )}
 
       <Modal
         open={open}
