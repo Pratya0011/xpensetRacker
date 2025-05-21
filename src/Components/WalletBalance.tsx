@@ -34,7 +34,7 @@ function WalletBalance() {
         </Typography>
       </Box>
       <Button
-        startIcon={<AddIcon />}
+        // startIcon={<AddIcon />}
         sx={{
           background: "linear-gradient(90deg, #B5DC52 0%, #89E148 100%)",
           color: "#fff",
@@ -45,7 +45,7 @@ function WalletBalance() {
           py: "10px",
         }}
       >
-        Add Income
+        + Add Income
       </Button>
     </Grid>
   );
