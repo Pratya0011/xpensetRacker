@@ -34,7 +34,7 @@ function TotalExpences() {
         </Typography>
       </Box>
       <Button
-        startIcon={<AddIcon />}
+        // startIcon={<AddIcon />}
         sx={{
           background:
             "linear-gradient(90deg, #FF9595 15%, #FF4747 60%, #FF3838 100%)",
@@ -46,7 +46,7 @@ function TotalExpences() {
           py: "10px",
         }}
       >
-        Add Expense
+        + Add Expense
       </Button>
     </Grid>
   );
