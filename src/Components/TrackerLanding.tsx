@@ -1,6 +1,9 @@
 import { Grid, Typography } from "@mui/material";
 import React from "react";
 
+import TotalExpences from "./TotalExpences";
+import WalletBalance from "./WalletBalance";
+
 function TrackerLanding() {
   return (
     <Grid sx={{ minHeight: "100vh", px: "32px", pt: 2 }}>
@@ -10,6 +13,26 @@ function TrackerLanding() {
       >
         Expense Tracker
       </Typography>
+      <Grid
+        container
+        sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          px: "42px",
+          py: "58px",
+          backgroundColor: "#626262",
+          borderRadius: "10px",
+          mt: 2,
+        }}
+        spacing={2}
+      >
+        <Grid size={{ lg: 4, md: 6, sm: 12, xs: 12 }}>
+          <WalletBalance />
+        </Grid>
+        <Grid size={{ lg: 4, md: 6, sm: 12, xs: 12 }}>
+          <TotalExpences />
+        </Grid>
+      </Grid>
     </Grid>
   );
 }
