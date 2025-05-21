@@ -255,7 +255,7 @@ function TotalExpences({
                 sx={{ backgroundColor: "#F4BB4A", borderRadius: "15px" }}
                 type="submit"
               >
-                Add Balance
+                Add Expense
               </Button>
               <Button
                 variant="contained"
