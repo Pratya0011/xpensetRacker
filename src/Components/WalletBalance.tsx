@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function WalletBalance() {
   const [state, setState] = useState<any>(null);
@@ -17,6 +17,11 @@ function WalletBalance() {
     borderRadius: "15px",
     p: 3,
   };
+
+  useEffect(() => {
+    const data = 5000;
+    localStorage.setItem("balance", JSON.stringify(data));
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
