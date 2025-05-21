@@ -4,6 +4,7 @@ import PieChart from "./PieChart";
 import TotalExpences from "./TotalExpences";
 import WalletBalance from "./WalletBalance";
 import RecentTrans from "./RecentTrans";
+import TopExpense from "./TopExpense";
 
 function TrackerLanding() {
   const storedExpenses = localStorage.getItem("expenses");
@@ -74,7 +75,7 @@ function TrackerLanding() {
         </Grid>
       </Grid>
       <Grid mt={2} sx={{ width: "100%", gap: 2 }} container>
-        <Grid size={{ lg: 7, md: 5, sm: 12, xs: 12 }}>
+        <Grid size={{ lg: 6.5, md: 5, sm: 12, xs: 12 }}>
           <Typography
             variant="h5"
             sx={{ fontSize: "32px", fontWeight: 700, color: "#ffff" }}
@@ -90,7 +91,7 @@ function TrackerLanding() {
           />
         </Grid>
 
-        <Grid size={{ lg: 4, md: 5, sm: 12, xs: 12 }}>
+        <Grid size={{ lg: 5.2, md: 5, sm: 12, xs: 12 }}>
           <Typography
             variant="h5"
             sx={{ fontSize: "32px", fontWeight: 700, color: "#ffff" }}
@@ -98,6 +99,7 @@ function TrackerLanding() {
             Top Expenses
           </Typography>
           {/* <RecentTrans /> */}
+          <TopExpense categoryTotal={categoryTotal} />
         </Grid>
       </Grid>
     </Grid>
