@@ -1,18 +1,18 @@
 // PieChart.tsx
-import React from "react";
+import React, { useEffect } from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Box } from "@mui/material";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChart = () => {
+const PieChart = ({ categoryTotal }: any) => {
   const data = {
-    labels: ["Food", "Entertainment", "Travel"],
+    labels: Object.keys(categoryTotal),
     datasets: [
       {
         label: "Expenses",
-        data: [300, 500, 200],
+        data: Object.values(categoryTotal),
         backgroundColor: ["#A000FF", "#FF9304", "#FDE006"],
         borderWidth: 1,
       },

@@ -18,9 +18,16 @@ interface IState {
 
 const options = ["Food", "Entertainment", "Travel"];
 
-function TotalExpences() {
+function TotalExpences({
+  netBalanc,
+  setNetBalance,
+  categoryTotal,
+  setCategoryTotal,
+}: any) {
   const storedExpenses = localStorage.getItem("expenses");
   const balance: any = storedExpenses ? JSON.parse(storedExpenses) : [];
+  const storedIncome = localStorage.getItem("balance");
+  const incomeBalance: any = storedIncome ? JSON.parse(storedIncome) : 0;
   const [total, setTotal] = useState<number>(0);
   const [state, setState] = useState<IState[]>([]);
   const [formData, setFormData] = useState<IState>({
@@ -41,16 +48,17 @@ function TotalExpences() {
     borderRadius: "15px",
     p: 2,
   };
-
   useEffect(() => {
-    if (balance?.length > 0) {
-      const totalExpense = balance.reduce(
+    const storedExpenses = localStorage.getItem("expenses");
+    if (storedExpenses) {
+      setState(JSON.parse(storedExpenses));
+      const totalExpense = JSON.parse(storedExpenses)?.reduce(
         (acc: any, item: any) => acc + Number(item.price),
         0
       );
       setTotal(totalExpense);
     }
-  }, [balance]);
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
@@ -59,8 +67,29 @@ function TotalExpences() {
   const addExpense = (e: any) => {
     e.preventDefault();
     const data = [...state, formData];
+    const totals: { [key: string]: number } = {};
     setState(data);
     localStorage.setItem("expenses", JSON.stringify(data));
+
+    const totalExpense = data.reduce(
+      (acc: any, item: any) => acc + Number(item.price),
+      0
+    );
+    setTotal(totalExpense);
+    const walletData = incomeBalance - totalExpense;
+    setNetBalance(walletData);
+
+    data.forEach((item) => {
+      const category = item.category;
+      const price = Number(item.price);
+      if (totals[category]) {
+        totals[category] += price;
+      } else {
+        totals[category] = price;
+      }
+    });
+    setCategoryTotal(totals);
+    localStorage.setItem("balance", JSON.stringify(walletData));
     setFormData({
       title: "",
       price: null,
@@ -173,32 +202,32 @@ function TotalExpences() {
                 />
               </Grid>
               <Grid size={{ lg: 5, md: 5, sm: 12, xs: 12 }}>
-                <Autocomplete
-                  disablePortal
-                  disableClearable
-                  options={options}
-                  sx={{ border: "none" }}
-                  fullWidth
-                  size="small"
+                <select
+                  id="category-select"
+                  name="category"
+                  required
                   value={formData?.category}
-                  onChange={(e: any, value: any) =>
+                  onChange={(e: any) =>
                     setFormData((prev: IState) => {
                       return {
                         ...prev,
-                        category: value,
+                        category: e.target.value,
                       };
                     })
                   }
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      name="category"
-                      required
-                      label="Select Category"
-                      placeholder="Select Category"
-                    />
-                  )}
-                />
+                  style={{
+                    height: 40,
+                    width: "100%",
+                    backgroundColor: "transparent",
+                  }}
+                >
+                  <option value="">Select Category</option>
+                  {options.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
               </Grid>
               <Grid size={{ lg: 5, md: 5, sm: 12, xs: 12 }}>
                 <TextField

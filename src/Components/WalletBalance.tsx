@@ -1,7 +1,7 @@
 import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
-function WalletBalance() {
+function WalletBalance({ netBalance, setNetBalance }: any) {
   const [state, setState] = useState<any>(null);
   const [open, setOpen] = useState<boolean>(false);
   const storedIncome = localStorage.getItem("balance");
@@ -19,9 +19,14 @@ function WalletBalance() {
   };
 
   useEffect(() => {
-    const data = 5000;
-    localStorage.setItem("balance", JSON.stringify(data));
-  }, []);
+    if (!balance) {
+      const data = 5000;
+      localStorage.setItem("balance", JSON.stringify(data));
+      setNetBalance(data);
+    } else {
+      setNetBalance(balance);
+    }
+  }, [netBalance]);
 
   const handleClose = () => {
     setOpen(false);
@@ -63,7 +68,7 @@ function WalletBalance() {
           Wallet Balance:
         </Typography>
         <Typography variant="h5" sx={{ color: "#9DFF5B" }}>
-          ₹{balance || 0}
+          ₹{netBalance || 0}
         </Typography>
       </Box>
       <Button
