@@ -141,7 +141,7 @@ function RecentTrans({
       {transitionList?.length > 0 ? (
         <>
           {currentItems?.map((item: any, index: number) => (
-            <React.Fragment key={index}>
+            <Box key={index}>
               <Grid
                 sx={{
                   display: "flex",
@@ -245,7 +245,7 @@ function RecentTrans({
                 </Grid>
               </Grid>
               <Divider sx={{ width: "100%", color: "#000" }} />
-            </React.Fragment>
+            </Box>
           ))}
 
           <Grid

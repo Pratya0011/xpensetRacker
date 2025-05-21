@@ -78,7 +78,7 @@ function TotalExpences({
       0
     );
     setTotal(totalExpense);
-    const walletData = incomeBalance - totalExpense;
+    const walletData = incomeBalance - formData.price;
     setNetBalance(walletData);
 
     data.forEach((item) => {
